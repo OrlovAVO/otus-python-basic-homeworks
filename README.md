@@ -1,2 +1,1 @@
-# Python Basic Homeworks 
-
+# Python Basic OTUS Homeworks 
