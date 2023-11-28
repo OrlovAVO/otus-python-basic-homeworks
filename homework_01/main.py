@@ -72,3 +72,4 @@ def filter_numbers(numbers, filter_type):
 print(power_numbers(1, 2, 5, 7))
 print(filter_numbers([1, 2, 3], ODD))
 print(filter_numbers([2, 1, 3, 5, 4], EVEN))
+
