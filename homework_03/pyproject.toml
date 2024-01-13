@@ -1,0 +1,22 @@
+[tool.poetry]
+name = "homework-03"
+version = "0.1.0"
+description = ""
+authors = ["Denis Fegir <denisfegir@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+uvicorn = "^0.25.0"
+pydantic = "^2.5.3"
+fastapi = "^0.109.0"
+
+[tool.poetry.group.dev.dependencies]
+fastapi = "^0.109.0"
+
+[tool.poetry.dev-dependencies]
+#docker = "7.0.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
