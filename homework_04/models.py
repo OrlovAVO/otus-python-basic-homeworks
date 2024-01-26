@@ -1,71 +1,61 @@
 import os
-from sqlalchemy import String, ForeignKey, Column, false, Integer, Text
-from sqlalchemy.ext.asyncio import AsyncSession
-from sqlalchemy.ext.asyncio import create_async_engine
-from sqlalchemy.orm import declarative_base
-from sqlalchemy.orm import relationship
-from sqlalchemy.orm import sessionmaker
+from sqlalchemy import Column, Integer, String, ForeignKey, create_engine
+from sqlalchemy.ext.asyncio import create_async_engine, AsyncSession
+from sqlalchemy.orm import declarative_base, declared_attr, sessionmaker, relationship
 
+PG_CONN_URI = os.environ.get("SQLALCHEMY_PG_CONN_URI") or "postgresql+asyncpg://postgres:example@localhost/postgres"
 
-PG_CONN_URI = os.environ.get("SQLALCHEMY_PG_CONN_URI") or "postgresql+asyncpg://user:example@localhost:5432/blog"
-DB_ECHO = False
 
 class Base:
-    id = Column(Integer, primary_key=True, nullable=False, unique=True)
+    @declared_attr
+    def __tablename__(cls):
+        return f"{cls.__name__.lower()}s"
 
-async_engine = create_async_engine(url=PG_CONN_URI, echo=DB_ECHO)
+    @declared_attr
+    def id(self):
+        return Column(Integer, primary_key=True)
 
+
+engine = create_engine(url=PG_CONN_URI, echo=False)
+async_engine = create_async_engine(url=PG_CONN_URI,
+                                   echo=False,
+                                   pool_size=20,
+                                   max_overflow=10)
 Base = declarative_base(cls=Base)
+Base.metadata.bind = engine
 
 Session = sessionmaker(
     bind=async_engine,
-    expire_on_commit=False,
-    class_=AsyncSession
+    class_=AsyncSession,
+    expire_on_commit=False
 )
 
 
 class User(Base):
-    __tablename__ = "users"
-    name = Column(String(30), nullable=True, unique=False)
-    username = Column(String(100), nullable=False, unique=True)
-    email = Column(String(150), nullable=False, unique=True)
-    posts = relationship(
-        "Post",
-        back_populates="user",
-        uselist=True,
-    )
+    name = Column(String(30), nullable=False)
+    username = Column(String(30), nullable=False)
+    email = Column(String(50), nullable=False)
+    posts = relationship("Post",
+                         back_populates="user",
+                         uselist=True)
 
     def __str__(self):
-        return f"User(id = {self.id}, username={self.username!r}, email = {self.email})"
+        return f"{self.__class__.__name__}(id={self.id}, name={self.name}, username={self.username}, email={self.email})"
 
     def __repr__(self):
         return str(self)
 
 
 class Post(Base):
-    __tablename__ = "posts"
-    title = Column(String(100), nullable=False, unique=True)
-    body = Column(
-        Text,
-        nullable=False,
-        unique=False,
-        default="",
-        server_default=false(),
-    )
-    user_id = Column(
-        Integer,
-        ForeignKey("users.id"),
-        unique=False,
-        nullable=False,
-    )
-    user = relationship(
-        "User",
-        back_populates="posts",
-        uselist=False
-    )
+    user_id = Column(Integer, ForeignKey("users.id"), nullable=False, unique=False)
+    title = Column(String(100), nullable=False)
+    body = Column(String(1_000), nullable=False)
+    user = relationship("User",
+                        back_populates="posts",
+                        uselist=False)
 
     def __str__(self):
-        return f"Post(id = {self.id}, title={self.title!r})"
+        return f"{self.__class__.__name__}(user_id={self.user_id}, title={self.title})"
 
     def __repr__(self):
         return str(self)
