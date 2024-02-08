@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+    <div class="container-fluid">
+    <div class="col-4">
+        <h1>Add user</h1>
+          <form method="post">
+
+            {{ form.hidden_tag() }}
+
+            {{ form.name.label(class="form-label") }}
+            {{ form.name(class="form-control") }}
+
+            {{ form.username.label(class="form-label") }}
+            {{ form.username(class="form-control") }}
+
+            {{ form.email.label(class="form-label") }}
+            {{ form.email(class="form-control") }}
+
+            {% if form.errors %}
+              <div class="errors my-2">
+                {% for name, errors in form.errors.items() %}
+                  <div class="alert alert-danger">
+                    {% if name %}
+                      <strong>{{ name }}</strong>
+                    {% endif %}
+                    <ul>
+                      {% for error in errors %}
+                        <li>{{ error }}</li>
+                      {% endfor %}
+                    </ul>
+                  </div>
+                {% endfor %}
+              </div>
+            {% endif %}
+
+            <button type="submit" class="btn btn-primary my-2">Create user</button>
+          </form>
+    </div>
+    </div>
+{% endblock %}
+
+
+{% block title %}
+  Add user
+{% endblock %}

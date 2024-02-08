@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="{{ url_for('static', filename='css/bootstrap.min.css') }}" rel="stylesheet">
+    <title>
+        {% block title %}
+            Base Title
+        {% endblock %}
+    </title>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Blog</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+                {% set view_blog_path = url_for("view_blog") %}
+              <a class="nav-link {{ 'active' if request.path == view_blog_path else '' }} " aria-current="page" href="{{ view_blog_path }}">View blog</a>
+            </li>
+            <li class="nav-item">
+                {% set add_post_path = url_for("posts_app.add_post") %}
+              <a class="nav-link {{ 'active' if request.path == add_post_path else '' }}" href="{{ add_post_path }}">Add post</a>
+            </li>
+            <li class="nav-item">
+                {% set add_user_path = url_for("users_app.add_user") %}
+              <a class="nav-link {{ 'active' if request.path == add_user_path else '' }}" href="{{ add_user_path }}">Add user</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    {% block body %}
+        Base body
+    {% endblock %}
+
+    <script src={{ url_for('static', filename='js/bootstrap.bundle.min.js') }}></script>
+</body>
+
+</html>
