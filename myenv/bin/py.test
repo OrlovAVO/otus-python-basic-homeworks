@@ -1,4 +1,4 @@
-#!/home/orwell/PycharmProjects/otus_hm_01/myenv/bin/python
+#!/home/orwell/BasePython-homeworks-new/.myenv/bin/python
 # -*- coding: utf-8 -*-
 import re
 import sys
