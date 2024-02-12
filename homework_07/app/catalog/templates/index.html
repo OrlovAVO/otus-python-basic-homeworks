@@ -1,0 +1,16 @@
+{% extends "base_generic.html" %}
+
+{% block content %}
+<h1>Библиотека</h1>
+
+  <p>Добро пожаловать в <strong>Библиотеку</strong>, проектную работу для <a href="https://www.otus.ru"> OTUS</a>.</p>
+
+  <p>В библиотеке имеется следующее количество записей:</p>
+  <ul>
+    <li><strong>Книги:</strong> {{ num_books }}</li>
+    <li><strong>Копии:</strong> {{ num_instances }}</li>
+    <li><strong>Доступное количество книг:</strong> {{ num_instances_available }}</li>
+    <li><strong>Авторы:</strong> {{ num_authors }}</li>
+  </ul>
+
+{% endblock %}
