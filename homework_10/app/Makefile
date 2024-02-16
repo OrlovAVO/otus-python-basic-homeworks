@@ -24,3 +24,6 @@ fill_db:
 
 test:
 	python manage.py test
+
+tests:
+	pytest
