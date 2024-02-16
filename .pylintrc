@@ -1,0 +1,30 @@
+[MASTER]
+ignore-paths = testing,
+               homework_01,
+               homework_02,
+               homework_03,
+               homework_04,
+               homework_05,
+               homework_06,
+               homework_07,
+               homework_08,
+               homework_09,
+               homework_10/app/catalog/migrations,
+               homework_11,
+disable =
+    C0116, # method
+    C0115, # class
+    C0114, # module
+    C0415, # Import outside toplevel (django.core.management.execute_from_command_line) (import-outside-toplevel)
+    E1101, #  Class 'ClassName' has no 'objects' member (no-member) (будут добавлены позже)
+    R0901, # Too many ancestors (9/7) (too-many-ancestors)
+    R0903, # Too few public methods (0/2) (too-few-public-methods)
+    E0307, # __str__ does not return str (invalid-str-returned)
+    W0212, # Access to a protected member _meta of a client class (protected-access)
+    E0401, # Unable to import 'catalog.forms' (import-error) (Нужный импорт для тестов)
+    E0611, # No name 'forms' in module 'catalog' (no-name-in-module) (Нужный импорт для тестов)
+    C0209,
+
+
+
+
