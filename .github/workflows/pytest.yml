@@ -20,6 +20,7 @@ jobs:
         pip install -r requirements-dev.txt
         pip install -r homework_10/requirements.txt
         pip install pytest
+        cd homework_10/app
     - name: Analysing the code with pylint
       run: |
-        pytest
+        python manage.py test
