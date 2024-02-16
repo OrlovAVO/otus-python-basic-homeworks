@@ -22,6 +22,4 @@ jobs:
         pip install -r homework_10/requirements.txt
     - name: Analysing the code with pylint
       run: |
-        cd ..
-        cd homework_10/app
         python manage.py test
