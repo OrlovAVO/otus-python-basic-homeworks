@@ -1,4 +1,7 @@
 from django.test import TestCase
+
+# Create your tests here.
+
 from catalog.models import Author
 
 
@@ -55,7 +58,7 @@ class AuthorModelTest(TestCase):
     def test_object_name_is_last_name_comma_first_name(self):
         print('Начало test_object_name_is_last_name_comma_first_name')
         author = Author.objects.get(id=1)
-        expected_object_name = f'{0}, {1}'.format(author.last_name, author.first_name)
+        expected_object_name = '{0}, {1}'.format(author.last_name, author.first_name)
         self.assertEqual(str(author), expected_object_name)
         print('Конец test_object_name_is_last_name_comma_first_name')
 

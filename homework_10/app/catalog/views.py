@@ -1,13 +1,13 @@
 import datetime
 from django.shortcuts import render
 from django.views import generic
-from django.contrib.auth.mixins import LoginRequiredMixin
-from django.urls import reverse
+from django.contrib.auth.decorators import permission_required
 from django.shortcuts import get_object_or_404
 from django.http import HttpResponseRedirect
-from django.contrib.auth.decorators import permission_required
-from .models import Book, Author, BookInstance
+from django.urls import reverse
+from django.contrib.auth.mixins import LoginRequiredMixin
 from .forms import RenewBookForm
+from .models import Book, Author, BookInstance
 
 
 def index(request):
@@ -19,8 +19,9 @@ def index(request):
     return render(
         request,
         'index.html',
-        context={'num_books': num_books, 'num_instances': num_instances,
-                 'num_instances_available': num_instances_available, 'num_authors': num_authors},
+        context={'num_books': num_books,
+                 'num_instances': num_instances, 'num_instances_available': num_instances_available,
+                 'num_authors': num_authors},
     )
 
 
@@ -71,5 +72,4 @@ def renew_book_librarian(request, pk):
         form = RenewBookForm(initial={'renewal_date': proposed_renewal_date, })
 
     return render(request,
-                  'catalog/book_renew_librarian.html', {'form': form, 'bookinst': book_inst}
-                  )
+                  'catalog/book_renew_librarian.html', {'form': form, 'bookinst': book_inst})

@@ -10,8 +10,8 @@ class AuthorListViewTest(TestCase):
         print('Начало setUpTestData')
         number_of_authors = 13
         for author_id in range(number_of_authors):
-            Author.objects.create(first_name=f'Александр {0}'.format(author_id),
-                                  last_name=f'Пушкин {0}'.format(author_id))
+            Author.objects.create(first_name='Александр {0}'.format(author_id),
+                                  last_name='Пушкин {0}'.format(author_id))
         print('Конец')
 
     def test_view_url_exists_at_desired_location(self):

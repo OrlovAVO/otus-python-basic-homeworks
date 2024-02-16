@@ -24,6 +24,3 @@ fill_db:
 
 test:
 	python manage.py test
-
-pylint:
-	pylint .
