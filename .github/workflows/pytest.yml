@@ -20,6 +20,8 @@ jobs:
         pip install -r requirements-dev.txt
         pip install pytest
         pip install -r homework_10/requirements.txt
+    - name: Change directory
+      run: cd otus-python-basic-homeworks/homework_10/app
     - name: Analysing the code with pylint
       run: |
         python manage.py test
