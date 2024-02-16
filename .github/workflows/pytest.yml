@@ -1,8 +1,6 @@
 name: Pytest
 
-on:
-  push:
-    branches: [ "homework_10" ]
+on: [push]
 
 jobs:
   build:
