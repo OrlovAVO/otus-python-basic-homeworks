@@ -18,9 +18,9 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements-dev.txt
-        pip install -r homework_10/requirements.txt
         pip install pytest
-        cd homework_10/app
+        pip install -r homework_10/requirements.txt
     - name: Analysing the code with pylint
       run: |
+        cd homework_10/app
         python manage.py test
